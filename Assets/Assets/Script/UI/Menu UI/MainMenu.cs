@@ -25,7 +25,7 @@ public class MainMenu : MonoBehaviour
     {
         
         transition.SetTrigger("FadeIn");
-        AudioManager.Instance.PlaySFX(AudioManager.Instance.transitionSFX);
+        AudioManager.Instance.PlaySFX(AudioManager.Instance.startSFX);
         yield return new WaitForSeconds(2f);
         AudioManager.Instance.PlayBackground();
         SceneManager.LoadSceneAsync(1);
