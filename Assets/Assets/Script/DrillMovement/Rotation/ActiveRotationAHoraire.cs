@@ -5,8 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class ActiveRotationAHoraire : MonoBehaviour
 {
-    
-    [SerializeField] private BoxCollider2D Collider2d;
     [SerializeField] private Transform grid;
 
 
@@ -42,7 +40,7 @@ public class ActiveRotationAHoraire : MonoBehaviour
         }
     }
 
-    //Fonction qui permet de faire tourner le niveau de 90°
+    //Fonction qui permet de faire tourner le niveau de 90ï¿½
     private IEnumerator Rotate(Vector3 angles, float duration)
     {
         isRotating = true;
