@@ -13,15 +13,15 @@ public class ActiveRotationHoraire : MonoBehaviour
     void OnTriggerEnter2D(Collider2D truc)
     {
         //Si le joueur est en contact avec le bouton
-        if(truc.tag == "Player")
+        if(truc.CompareTag("Player"))
         {
             isTrigger = true;
         }
     }
-    private void OnTriggerExit2D(Collider2D collision)
+    private void OnTriggerExit2D(Collider2D truc)
     {
         //Si le joueur n'est plus en contact avec le bouton
-        if(collision.tag == "Player")
+        if(truc.CompareTag("Player"))
         {
             isTrigger = false;
         }

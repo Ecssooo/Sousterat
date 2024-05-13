@@ -25,6 +25,10 @@ public class HeroEntity : MonoBehaviour
     [Header("Wall")] [SerializeField] private WallDetector _wallDetector;
     public bool IsTouchingWall { get; private set; }
 
+    [Header("Top")] [SerializeField] private TopDetector _topDetector;
+    
+    public bool IsTouchingTop { get; private set; }
+
     [SerializeField] private HeroWallInteractSettings _wallInteractSettings;
     public bool isWallSliding { get; private set; }
     public bool wallJumpAvailable { get; private set; }
@@ -45,20 +49,6 @@ public class HeroEntity : MonoBehaviour
     public static JumpState _jumpState = JumpState.NotJumping;
     
     private float _jumpTimer = 0f;
-
-    [SerializeField] private HeroJumpSettings[] _listHeroMultiJump;
-    public bool wasJumping { get; private set; }
-    public int indexJump = 1;
-    private bool canJump;
-
-    [Header("Dash")] [FormerlySerializedAs("_dashsettings")]
-    [SerializeField] private DashSettings _groundDashSettings;
-
-    [SerializeField] private DashSettings _airDashSettings;
-
-    [SerializeField] private HeroFallSettings _dashFallSettings;
-    private bool _isDashing = false;
-    private float _dashTimer = 0f;
 
     [Header("Orientation")] [SerializeField]
     private Transform _orientVisualRoot;
@@ -95,9 +85,10 @@ public class HeroEntity : MonoBehaviour
     {
         _ApplyGroundDetection();
         _ApplyWallDetection();
+        _ApplyTopDetection();
         //_UpdateCameraFollowPosition();
         HeroHorizontalMovementSettings horizontalMovementSettings = _getCurrentHorizontalMovementSettings();
-        DashSettings dashSettings = _getCurrentDashSettings();
+        
         if (_AreOrientAndMovementOpposite())
         {
             _TurnBack(horizontalMovementSettings);
@@ -116,22 +107,19 @@ public class HeroEntity : MonoBehaviour
                 _WallSlide(_wallInteractSettings);
             }
         }
-
-        if (_isDashing)
+        if (IsTouchingTop)
         {
-            _UpdateDashImpulsion(dashSettings);
+            _ResetVerticalSpeed();  
+            StopJumpImpulsion();
+            _ApplyFallGravity(_fallSettings);
         }
         else
         {
-            if (IsJumping && canJump)
+            if (IsJumping)
             {
                 if (_IsWallSliding())
                 {
                     _WallJumping();
-                }
-                else if (WasJumping())
-                {
-                    _MultiJump();
                 }
                 else
                 {
@@ -266,11 +254,11 @@ public class HeroEntity : MonoBehaviour
     private void _ApplyGroundDetection()
     {
         IsTouchingGround = _groundDetector.DetectGroundNearBy();
-        if (IsTouchingGround)
-        {
-            indexJump = 1;
-            canJump = true;
-        }
+    }
+    
+    private void _ApplyTopDetection()
+    {
+        IsTouchingTop = _topDetector.DetectWallNearByTop();
     }
 
     public void _ResetVerticalSpeed()
@@ -279,45 +267,7 @@ public class HeroEntity : MonoBehaviour
     }
 
     #endregion
-
-    #region Dash
-
-    public void StartDash()
-    {
-        _isDashing = true;
-        _dashTimer = 0f;
-    }
-
-    private void _UpdateDashImpulsion(DashSettings settings)
-    {
-        _dashTimer += Time.fixedDeltaTime;
-        if (_dashTimer < settings.DashDuration)
-        {
-            _horizontalSpeed = settings.DashSpeed;
-            _UpdateJump(_currentJumpSettings);
-            _ApplyFallGravity(_dashFallSettings);
-        }
-        else
-        {
-            _horizontalSpeed = _getCurrentHorizontalMovementSettings().speedMax;
-            _isDashing = false;
-        }
-    }
-
-    private DashSettings _getCurrentDashSettings()
-    {
-        if (IsTouchingGround)
-        {
-            return _groundDashSettings;
-        }
-        else
-        {
-            return _airDashSettings;
-        }
-    }
-
-    #endregion
-
+    
     #region Jump
 
     public void JumpStart()
@@ -378,32 +328,6 @@ public class HeroEntity : MonoBehaviour
                 _UpdateJumpStateFalling();
                 break;
         }
-    }
-
-    private void _MultiJump()
-    {
-        if (indexJump >= _listHeroMultiJump.Length)
-        {
-            canJump = false;
-        }
-        else
-        {
-            _UpdateJump(_listHeroMultiJump[indexJump]);
-        }
-    }
-
-    private bool WasJumping()
-    {
-        if (_jumpState == JumpState.Falling)
-        {
-            wasJumping = true;
-        }
-        else
-        {
-            wasJumping = false;
-        }
-
-        return wasJumping;
     }
 
     #endregion
@@ -495,12 +419,7 @@ public class HeroEntity : MonoBehaviour
         GUILayout.Label($"IsTouchingWall = {IsTouchingWall}");
         GUILayout.Label($"Horizontal Speed = {_horizontalSpeed}");
         GUILayout.Label($"Vertical Speed = {_verticalSpeed}");
-        GUILayout.Label($"IsDashing = {_isDashing}");
-        GUILayout.Label($"WasJumping = {WasJumping()}");
         GUILayout.Label($"WasJumping = {_jumpState}");
-        GUILayout.Label($"WasJumping = {indexJump}");
-        
-
         GUILayout.EndVertical();
     }
 }

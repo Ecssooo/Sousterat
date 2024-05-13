@@ -38,13 +38,7 @@ public class HeroController : MonoBehaviour
     {
         _UpdateJumpBuffer(); 
         _entity.SetMoveDirX(GetInputMoveX());
-        if (GetInputDash())
-        {
-            _entity.StartDash();
-            _entity.StopJumpImpulsion();
-        }
-        else
-        {
+        
             if (_EntityHasExitGround())
             {
                 _ResetCoyoteTime();
@@ -60,10 +54,6 @@ public class HeroController : MonoBehaviour
                 if ((_entity.IsTouchingGround ||_IsCoyoteActive()) && !_entity.IsJumping)
                 {
                     _entity.JumpStart();
-                }else if (_entity.wasJumping && !_entity.IsTouchingGround)
-                {
-                    _entity.JumpStart();
-                    _entity.indexJump++;
                 }
                 else
                 {
@@ -77,8 +67,7 @@ public class HeroController : MonoBehaviour
                         _ResetJumpBuffer();
                     }
                 }
-            }
-
+            
             if (IsJumpBufferActive())
             {
                 if ((_entity.IsTouchingGround ||_IsCoyoteActive()) && !_entity.IsJumping)
@@ -115,11 +104,6 @@ public class HeroController : MonoBehaviour
             inputMoveX = 1f;
         }
         return inputMoveX;
-    }
-    
-    private bool GetInputDash()
-    {
-        return Input.GetKeyDown(KeyCode.J);
     }
     #endregion
     
