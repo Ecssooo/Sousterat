@@ -15,8 +15,11 @@ public class AudioManager : MonoBehaviour
     public AudioClip startSFX;
     public AudioClip burstSFX;
     public AudioClip charbonSFX;
+    public AudioClip engineSFX;
     public AudioClip end_fuelSFX;
-    public AudioClip collisionSFX;
+    public AudioClip collision_1SFX;
+    public AudioClip collision_2SFX;
+    public AudioClip collision_3SFX;
 
 
     [Header("Music Clips")]
