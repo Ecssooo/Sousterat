@@ -14,7 +14,8 @@ public class CameraZoom : MonoBehaviour
     private float _zoom;
     private bool _initialZoomDone = false;
 
-
+    [SerializeField] private LevelSpeedManager _levelSpeedManager;
+    [SerializeField] private float _multiplySpeed;
 
     private void Awake()
     {
@@ -33,7 +34,7 @@ public class CameraZoom : MonoBehaviour
     private void _CameraZoom() 
     {
        
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.Q))
         {
             _initialZoomDone=true;
             
@@ -42,12 +43,14 @@ public class CameraZoom : MonoBehaviour
 
                 _zoom = _zoomMax;
                 _cameraZoom = true;
+                _levelSpeedManager.levelSpeed = _levelSpeedManager.InitLevelSpeed * _multiplySpeed;
 
             }
             else
             {
                 _zoom = _zoomMin;
                 _cameraZoom = false;
+                _levelSpeedManager.levelSpeed = _levelSpeedManager.InitLevelSpeed ;
             }
             
 
