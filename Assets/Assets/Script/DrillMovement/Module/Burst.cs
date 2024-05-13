@@ -60,7 +60,7 @@ public class Burst : MonoBehaviour
             _isBurst = false;
             _burstCooldown = 0f;
             _levelSpeedManager.levelSpeed = _levelSpeedManager.InitLevelSpeed;
-            _levelSpeedManager.fuelConsumption = _levelSpeedManager.InitfuelConsumption;
+            _levelSpeedManager.fuelConsumption = _levelSpeedManager.InitFuelConsumption;
         }
     }
 }

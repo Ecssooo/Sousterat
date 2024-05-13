@@ -16,6 +16,7 @@ public class CameraZoom : MonoBehaviour
 
     [SerializeField] private LevelSpeedManager _levelSpeedManager;
     [SerializeField] private float _multiplySpeed;
+    [SerializeField] private float _multiplyFuelConsumption;
 
     private void Awake()
     {
@@ -44,13 +45,15 @@ public class CameraZoom : MonoBehaviour
                 _zoom = _zoomMax;
                 _cameraZoom = true;
                 _levelSpeedManager.levelSpeed = _levelSpeedManager.InitLevelSpeed * _multiplySpeed;
+                _levelSpeedManager.fuelConsumption = _levelSpeedManager.InitFuelConsumption * _multiplyFuelConsumption;
 
             }
             else
             {
                 _zoom = _zoomMin;
                 _cameraZoom = false;
-                _levelSpeedManager.levelSpeed = _levelSpeedManager.InitLevelSpeed ;
+                _levelSpeedManager.levelSpeed = _levelSpeedManager.InitLevelSpeed;
+                _levelSpeedManager.fuelConsumption = _levelSpeedManager.InitFuelConsumption;
             }
             
 

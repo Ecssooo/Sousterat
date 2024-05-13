@@ -30,7 +30,7 @@ public class LevelSpeedManager : MonoBehaviour
     private FuelTankState _fuelTankState = FuelTankState.Full;
     [Tooltip("Float for Consumption (0-1)")]
     public float fuelConsumption;
-    public float InitfuelConsumption;
+    public float InitFuelConsumption;
     public enum FuelTankState
     {
         Empty,
@@ -43,6 +43,7 @@ public class LevelSpeedManager : MonoBehaviour
     private void Start()
     {
         levelSpeed = InitLevelSpeed;
+        fuelConsumption = InitFuelConsumption;
     }
 
     private void Update()
