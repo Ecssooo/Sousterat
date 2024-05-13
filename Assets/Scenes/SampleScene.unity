@@ -6312,7 +6312,7 @@ MonoBehaviour:
   burstSFX: {fileID: 8300000, guid: 9fb605e38c6892f4bb5b01f30e35f9b0, type: 3}
   charbonSFX: {fileID: 8300000, guid: cdc4c3c1f1779f542926d2d0a313c5b7, type: 3}
   engineSFX: {fileID: 8300000, guid: 61887033833f92046b4f0e75df39e542, type: 3}
-  end_fuelSFX: {fileID: 0}
+  end_fuelSFX: {fileID: 8300000, guid: 5dccd82b8abb37549aebe81270dd1167, type: 3}
   collision_1SFX: {fileID: 8300000, guid: e349bd34a4636ae4b92f045237f2aee5, type: 3}
   collision_2SFX: {fileID: 8300000, guid: 6e3454c4d40bb3d47b6a4b9680a33883, type: 3}
   collision_3SFX: {fileID: 8300000, guid: c9074269230913f4899a0fa76d1d0f1d, type: 3}
