@@ -19,6 +19,7 @@ public class Snake : MonoBehaviour
 
     void Update()
     {
+        _Rotate();
         Vector3 dir = _target.position - transform.position;
         transform.Translate(dir.normalized* moveSpeed* Time.deltaTime,Space.World);
 
@@ -59,6 +60,19 @@ public class Snake : MonoBehaviour
 
 
 
+    }
+
+    private void _Rotate()
+    {
+        if (Mathf.Abs(_target.transform.position.x - transform.position.x) > Mathf.Abs(_target.transform.position.y - transform.position.y))
+        {
+            transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, 0);
+
+        }
+        else
+        {
+            transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, 90);
+        }
     }
 }
 
