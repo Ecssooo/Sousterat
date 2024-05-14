@@ -5,6 +5,9 @@ using UnityEngine;
 public class RockDetector : MonoBehaviour
 {
     [SerializeField] private LevelSpeedManager _levelSpeedManager;
+    [SerializeField] private ActiveRotationHoraire _rotationHoraire;
+    [SerializeField] private ActiveRotationAHoraire _rotationAntiHoraire;
+    
     
     void Update()
     {
@@ -30,6 +33,23 @@ public class RockDetector : MonoBehaviour
             {
                 _levelSpeedManager.mineState = LevelSpeedManager.MineState.Dirt;
             }
+            else if (hit.collider.gameObject.tag == "Edge")
+            {
+                _RandomRotation();
+            }
+        }
+    }
+
+    private void _RandomRotation()
+    {
+        int randomNumber = Random.Range(1, 2);
+        if (randomNumber == 1)
+        {
+            _rotationHoraire.StartRotation();
+        }
+        else if (randomNumber == 2)
+        {
+            _rotationAntiHoraire.StartRotation();
         }
     }
 }

@@ -58,7 +58,7 @@ public class ActiveRotationHoraire : MonoBehaviour
     }
 
     //Fonction qui permet de lancer la rotation
-    private void StartRotation()
+    public void StartRotation()
     {
         if (!isRotating)
         {

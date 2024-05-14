@@ -60,6 +60,8 @@ public class LevelSpeedManager : MonoBehaviour
         Granite,
         Calcite
     }
+
+    private MineState _lastMineState;
     
     private void Start()
     {
@@ -72,12 +74,12 @@ public class LevelSpeedManager : MonoBehaviour
     {
         _UpdateFuelState();
         _UpdateMinedRock();
-        if (_fuelTankState != _lastFuelTankState)
+        if (_fuelTankState != _lastFuelTankState || mineState != _lastMineState)
         {
             _lastFuelTankState = _fuelTankState;
+            _lastMineState = mineState;
             _UpdateLevelSpeed();
         }
-        _UpdateLevelSpeed();
     }
     
     private void _UpdateLevelSpeed()
