@@ -417,8 +417,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   musicSource: {fileID: 1972509796}
   SFXSource: {fileID: 1606857467}
-  transitionSFX: {fileID: 0}
-  background: {fileID: 8300000, guid: ff7187c02922c00468183944ede4f741, type: 3}
+  rotationSFX: {fileID: 8300000, guid: 81b158e03dfd4cf4cb4228af1f85f542, type: 3}
+  startSFX: {fileID: 8300000, guid: fc84d3e529e13e444aaacd4888ee4a17, type: 3}
+  burstSFX: {fileID: 8300000, guid: 9fb605e38c6892f4bb5b01f30e35f9b0, type: 3}
+  charbonSFX: {fileID: 8300000, guid: cdc4c3c1f1779f542926d2d0a313c5b7, type: 3}
+  engineSFX: {fileID: 8300000, guid: 61887033833f92046b4f0e75df39e542, type: 3}
+  end_fuelSFX: {fileID: 8300000, guid: 5dccd82b8abb37549aebe81270dd1167, type: 3}
+  collision_1SFX: {fileID: 8300000, guid: e349bd34a4636ae4b92f045237f2aee5, type: 3}
+  collision_2SFX: {fileID: 8300000, guid: 6e3454c4d40bb3d47b6a4b9680a33883, type: 3}
+  collision_3SFX: {fileID: 8300000, guid: c9074269230913f4899a0fa76d1d0f1d, type: 3}
+  background: {fileID: 8300000, guid: 301caf406d412704da10dfc67fd83256, type: 3}
+  mainMenu: {fileID: 0}
 --- !u!4 &163469407
 Transform:
   m_ObjectHideFlags: 0

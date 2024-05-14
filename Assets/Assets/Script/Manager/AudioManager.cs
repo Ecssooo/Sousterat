@@ -24,6 +24,7 @@ public class AudioManager : MonoBehaviour
 
     [Header("Music Clips")]
     public AudioClip background;
+    public AudioClip mainMenu;
 
 
 
@@ -56,8 +57,8 @@ public class AudioManager : MonoBehaviour
         SFXSource.PlayOneShot(clip);
     }
 
-    public void PlayBackground()
+    public void PlayBackground(AudioClip clip)
     {
-        musicSource.clip = background; musicSource.Play();
+        musicSource.clip = clip; musicSource.Play();
     }
 }
