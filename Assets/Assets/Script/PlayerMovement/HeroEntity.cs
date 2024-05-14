@@ -107,12 +107,12 @@ public class HeroEntity : MonoBehaviour
                 _WallSlide(_wallInteractSettings);
             }
         }
-        if (IsTouchingTop)
+        /*if (IsTouchingTop)
         {
             _ResetVerticalSpeed();  
             StopJumpImpulsion();
             _ApplyFallGravity(_fallSettings);
-        }
+        }*/
         else
         {
             if (IsJumping)
@@ -338,7 +338,7 @@ public class HeroEntity : MonoBehaviour
     {
         if (_orientX == 1f)
             IsTouchingWall = _wallDetector.DetectWallNearByRight();
-        if (_orientX == -1)
+        if (_orientX == -1f)
             IsTouchingWall = _wallDetector.DetectWallNearByLeft();
     }
 

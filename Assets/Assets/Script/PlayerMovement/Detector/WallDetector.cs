@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using UnityEditor.TextCore.Text;
 using UnityEngine;
 
 public class WallDetector : MonoBehaviour
@@ -29,6 +30,7 @@ public class WallDetector : MonoBehaviour
                 _groundWallLayerMask);
             if(hitResult.collider != null || hitResult2.collider != null)
             {
+                Debug.Log("Touche le mur");
                 return true;
             }
         }
@@ -51,6 +53,7 @@ public class WallDetector : MonoBehaviour
                 _groundWallLayerMask);
             if(hitResult.collider != null || hitResult2.collider != null)
             {
+                Debug.Log("Touche le mur");
                 return true;
             }
         }

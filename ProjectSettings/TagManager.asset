@@ -5,6 +5,11 @@ TagManager:
   serializedVersion: 2
   tags:
   - Drill
+  - CameraTriggerTarget
+  - Charbon
+  - Granite
+  - Calcite
+  - Edge
   layers:
   - Default
   - TransparentFX
@@ -15,12 +20,12 @@ TagManager:
   - Ground
   - OneWay
   - TriggerRotate
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - WorldEdge
+  - Granite
+  - Charbon
+  - Calcite
+  - Ver
+  - Terre
   - 
   - 
   - 
