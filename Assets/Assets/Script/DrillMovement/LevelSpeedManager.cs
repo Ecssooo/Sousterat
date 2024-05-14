@@ -13,6 +13,7 @@ public class LevelSpeedManager : MonoBehaviour
     [Header("Level Speed")]
     public float levelSpeed;
     public float InitLevelSpeed;
+    public float CurrentLevelSpeed;
     
     [Header("Multiplier Fuel")]
     [Tooltip("Float for percentage (0-1)")]
@@ -23,6 +24,16 @@ public class LevelSpeedManager : MonoBehaviour
     [SerializeField] private float MultiplierForHalf;
     [Tooltip("Float for percentage (0-1)")]
     [SerializeField] private float MultiplierForFull;
+    
+    [Header("Multiplier Rock")]
+    [Tooltip("Float for percentage (0-1)")]
+    [SerializeField] private float MultiplierForDirt;
+    [Tooltip("Float for percentage (0-1)")]
+    [SerializeField] private float MultiplierForCoal;
+    [Tooltip("Float for percentage (0-1)")]
+    [SerializeField] private float MultiplierForGranite;
+    [Tooltip("Float for percentage (0-1)")]
+    [SerializeField] private float MultiplierForCalcite;
     
     [Header("Fuel Tank")]
     [Tooltip("Float for fuel level (0-100)")]
@@ -40,20 +51,33 @@ public class LevelSpeedManager : MonoBehaviour
     }
     private FuelTankState _lastFuelTankState;
 
+    [Header("Mine")]
+    public MineState mineState = MineState.Dirt;
+    public enum MineState
+    {
+        Dirt,
+        Coal,
+        Granite,
+        Calcite
+    }
+    
     private void Start()
     {
         levelSpeed = InitLevelSpeed;
+        CurrentLevelSpeed = InitLevelSpeed;
         fuelConsumption = InitFuelConsumption;
     }
 
     private void Update()
     {
         _UpdateFuelState();
+        _UpdateMinedRock();
         if (_fuelTankState != _lastFuelTankState)
         {
             _lastFuelTankState = _fuelTankState;
             _UpdateLevelSpeed();
         }
+        _UpdateLevelSpeed();
     }
     
     private void _UpdateLevelSpeed()
@@ -61,20 +85,38 @@ public class LevelSpeedManager : MonoBehaviour
         switch (_fuelTankState)
         {
             case FuelTankState.Empty:
-                levelSpeed = InitLevelSpeed * MultiplierForEmplty;
+                levelSpeed = CurrentLevelSpeed * MultiplierForEmplty;
                 break;
             case FuelTankState.Quarter:
-                levelSpeed = InitLevelSpeed *MultiplierForQuarter;
+                levelSpeed = CurrentLevelSpeed * MultiplierForQuarter;
                 break;
             case FuelTankState.Half:
-                levelSpeed = InitLevelSpeed *MultiplierForHalf;
+                levelSpeed = CurrentLevelSpeed * MultiplierForHalf;
                 break;
             case FuelTankState.Full:
-                levelSpeed = InitLevelSpeed * MultiplierForFull;
+                levelSpeed = CurrentLevelSpeed * MultiplierForFull;
                 break;
         }
     }
-
+    private void _UpdateMinedRock()
+    {
+        switch (mineState)
+        {
+            case MineState.Dirt:
+                CurrentLevelSpeed = InitLevelSpeed * MultiplierForDirt;
+                break;
+            case MineState.Coal:
+                CurrentLevelSpeed = InitLevelSpeed * MultiplierForCoal;
+                break;
+            case MineState.Granite:
+                CurrentLevelSpeed = InitLevelSpeed * MultiplierForGranite;
+                break;
+            case MineState.Calcite:
+                CurrentLevelSpeed = InitLevelSpeed * MultiplierForCalcite;
+                break;
+        }
+    }
+    
     private void _UpdateFuelState()
     {
         
@@ -96,4 +138,6 @@ public class LevelSpeedManager : MonoBehaviour
             
         }
     }
+
+    
 }

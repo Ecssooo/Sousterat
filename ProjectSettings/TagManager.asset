@@ -10,6 +10,7 @@ TagManager:
   - Granite
   - Calcite
   - Edge
+  - Dirt
   layers:
   - Default
   - TransparentFX
