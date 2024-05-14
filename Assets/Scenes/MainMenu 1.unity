@@ -427,7 +427,7 @@ MonoBehaviour:
   collision_2SFX: {fileID: 8300000, guid: 6e3454c4d40bb3d47b6a4b9680a33883, type: 3}
   collision_3SFX: {fileID: 8300000, guid: c9074269230913f4899a0fa76d1d0f1d, type: 3}
   background: {fileID: 8300000, guid: 301caf406d412704da10dfc67fd83256, type: 3}
-  mainMenu: {fileID: 0}
+  mainMenu: {fileID: 8300000, guid: dfdc4fd38ab83934ea759ee49059c5d0, type: 3}
 --- !u!4 &163469407
 Transform:
   m_ObjectHideFlags: 0

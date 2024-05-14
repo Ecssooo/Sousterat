@@ -13,6 +13,7 @@ public class MainMenu : MonoBehaviour
     }
     public void PlayGame()
     {
+        AudioManager.Instance.StopMusic();
         StartCoroutine(LoadLevel());
 
     }
