@@ -11,8 +11,9 @@ public class TM_Manager : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.CompareTag("drill"))
+        if (other.gameObject.CompareTag("Drill"))
         {
+            Debug.Log("touche");
             Vector3 hitPosition = Vector3.zero;
             foreach (ContactPoint2D hit in other.contacts)
             {
