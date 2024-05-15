@@ -17,7 +17,6 @@ public class TilemapDestroyer : MonoBehaviour
             _TMSpriteLayer);
         if (hitPosition != null)
         {
-            Debug.Log("okok");
             DestroyTile(transform.position);
         }
     }

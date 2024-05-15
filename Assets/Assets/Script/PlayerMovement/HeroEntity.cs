@@ -55,7 +55,11 @@ public class HeroEntity : MonoBehaviour
 
     public static float _orientX = 1f;
 
+    [Header("Animation")] [SerializeField] private Animator _animator;
+    [SerializeField] private SASManager _sasManager;
+    
     [Header("Debug")] [SerializeField] private bool _guiDebug = false;
+    
 
     //[Header("Camera")] private CameraFollowable _cameraFollowable;
 
@@ -156,6 +160,28 @@ public class HeroEntity : MonoBehaviour
     public void SetMoveDirX(float dirX)
     {
         _moveDirX = dirX;
+        if (_moveDirX != 0)
+        {
+            if (_sasManager.playerHasCoal)
+            {
+                _animator.SetBool("WalkCoal",true);
+            }
+            else
+            {
+                _animator.SetBool("Walk", true);
+            }
+            
+        }else if (_moveDirX == 0)
+        {
+            if (_sasManager.playerHasCoal)
+            {
+                _animator.SetBool("WalkCoal",false);
+            }
+            else
+            {
+                _animator.SetBool("Walk", false);
+            }
+        }
     }
 
     private void _ApplyHorizontalSpeed()
@@ -273,6 +299,10 @@ public class HeroEntity : MonoBehaviour
     {
         _jumpState = JumpState.JumpImplusion;
         _jumpTimer = 0f;
+        if(_sasManager.playerHasCoal)
+            _animator.SetTrigger("JumpCoal");
+        else
+            _animator.SetTrigger("Jump");
     }
 
     public bool IsJumping => _jumpState != JumpState.NotJumping;
@@ -313,6 +343,7 @@ public class HeroEntity : MonoBehaviour
         {
             _ResetVerticalSpeed();
             _jumpState = JumpState.NotJumping;
+            
         }
     }
 
@@ -340,7 +371,6 @@ public class HeroEntity : MonoBehaviour
         if (_orientX == -1f)
         {
             IsTouchingWall = _wallDetector.DetectWallNearByLeft();
-            Debug.Log(IsTouchingWall);
         }
     }
 
@@ -357,7 +387,6 @@ public class HeroEntity : MonoBehaviour
             isWallSliding = false;
             _currentJumpSettings = _jumpSettings;
         }
-
         return isWallSliding;
     }
 
