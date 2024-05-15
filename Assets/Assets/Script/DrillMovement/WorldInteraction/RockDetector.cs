@@ -16,7 +16,6 @@ public class RockDetector : MonoBehaviour
         
         if (hit.collider != null)
         {
-           Debug.Log(hit.collider.gameObject.tag);
             if (hit.collider.gameObject.tag == "Charbon")
             {
                 _levelSpeedManager.mineState = LevelSpeedManager.MineState.Coal;
