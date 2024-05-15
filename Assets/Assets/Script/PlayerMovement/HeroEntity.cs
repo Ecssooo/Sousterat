@@ -107,14 +107,12 @@ public class HeroEntity : MonoBehaviour
                 _WallSlide(_wallInteractSettings);
             }
         }
-        /*
         if (IsTouchingTop)
         {
             _ResetVerticalSpeed();  
             StopJumpImpulsion();
             _ApplyFallGravity(_fallSettings);
         }
-        */
         else
         {
             if (IsJumping)

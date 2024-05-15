@@ -8,7 +8,7 @@ public class GroundDetector : MonoBehaviour
     [Header("Detection")]
 
     [SerializeField] private Transform[] _detectionPoints;
-    [SerializeField] private float _detectionLenght = 0.1f;
+    public float _detectionLenght = 0.1f;
     [SerializeField] private LayerMask _groundLayerMask;
     [SerializeField] private LayerMask _groundWallLayerMask;
 

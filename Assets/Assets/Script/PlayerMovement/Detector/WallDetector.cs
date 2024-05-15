@@ -10,7 +10,7 @@ public class WallDetector : MonoBehaviour
 
     [SerializeField] private Transform[] _detectionPointsRight;
     [SerializeField] private Transform[] _detectionPointsLeft;
-    [SerializeField] private float _detectionLenght = 0.1f;
+    public float _detectionLenght = 0.1f;
     [SerializeField] private LayerMask _wallLayerMask;
 
     public bool DetectWallNearByRight()

@@ -17,10 +17,13 @@ public class LevelMouvement : MonoBehaviour
     [Tooltip("List of oneway platforms according to their axis")]
     [SerializeField] private GameObject[] _plateformY;
     
-    
     [SerializeField] private Transform _gridToRotate;
     [SerializeField] private  LevelSpeedManager _levelSpeedManager;
     [SerializeField] private  Burst _burst;
+
+    [Header("Raycast")] 
+    [SerializeField] private WallDetector _wallDetector;
+    [SerializeField] private GroundDetector _groundDetector;
     
     private bool isTrigger;
     
@@ -63,6 +66,8 @@ public class LevelMouvement : MonoBehaviour
             _ResetPlateformColliderSense(_plateformX);
             _SetPlateformCollider(_plateformY, _plateformX);
             FuelUsed();
+            _SetWallRaycastLenght(0.2f);
+            _SetGroundRaycastLenght(0.05f);
             transform.position = new Vector2(transform.position.x + _levelSpeedManager.levelSpeed, transform.position.y);
         }
         else if(_gridToRotate.transform.rotation.eulerAngles.z == 180)
@@ -70,6 +75,8 @@ public class LevelMouvement : MonoBehaviour
             _SetPlateformColliderSense(_plateformX);
             _SetPlateformCollider(_plateformY, _plateformX);
             FuelUsed();
+            _SetWallRaycastLenght(0.2f);
+            _SetGroundRaycastLenght(0.05f);
             transform.position = new Vector2(transform.position.x - _levelSpeedManager.levelSpeed, transform.position.y);
         }
         else if(_gridToRotate.transform.rotation.eulerAngles.z == 90)
@@ -78,6 +85,8 @@ public class LevelMouvement : MonoBehaviour
             _SetPlateformColliderSense(_plateformY);
             _SetPlateformCollider(_plateformX, _plateformY);
             FuelUsed();
+            _SetWallRaycastLenght(0.2f);
+            _SetGroundRaycastLenght(0.1f);
             transform.position = new Vector2(transform.position.x, transform.position.y + _levelSpeedManager.levelSpeed);
             
         }
@@ -85,8 +94,10 @@ public class LevelMouvement : MonoBehaviour
         {
             _ResetPlateformColliderSense(_plateformY);
             _SetPlateformCollider(_plateformX, _plateformY);
-            transform.position = new Vector2(transform.position.x, transform.position.y - _levelSpeedManager.levelSpeed);
             FuelUsed();
+            _SetWallRaycastLenght(0.2f);
+            _SetGroundRaycastLenght(0.01f);
+            transform.position = new Vector2(transform.position.x, transform.position.y - _levelSpeedManager.levelSpeed);
         }
         else
         {
@@ -131,6 +142,16 @@ public class LevelMouvement : MonoBehaviour
         }
     }
 
+    private void _SetWallRaycastLenght(float lenght)
+    {
+        _wallDetector._detectionLenght = lenght;
+    }
+
+    private void _SetGroundRaycastLenght(float lenght)
+    {
+        _groundDetector._detectionLenght = lenght;
+    }
+    
     public void FuelUsed()
     {
         //Consomation du carburant;
