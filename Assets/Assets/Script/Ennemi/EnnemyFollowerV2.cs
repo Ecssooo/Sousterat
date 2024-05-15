@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,13 +11,17 @@ public class EnnemyFollowerV2 : MonoBehaviour
     [SerializeField] private float _shakingTime;
 
     [Header("Paramètres Vitesse")]
-    public float minSpeed = 2.0f;  
-    public float maxSpeed = 5.0f;
+    [SerializeField] float _minSpeed = 2.0f;  
+    [SerializeField] float _maxSpeed = 5.0f;
+    [SerializeField] float _touchSpeed;
     [SerializeField] float _burstSpeed;
-    [SerializeField]private GameObject target;
     [SerializeField] private bool isTouch=false;
 
-    
+    [Header("Paramètres du cible")]
+    [SerializeField] private GameObject target;
+    [SerializeField] private BoxCollider2D _collider2d;
+
+
     private float _currentSpeed;
     private float directionX;
     private float directionY;
@@ -34,23 +39,23 @@ public class EnnemyFollowerV2 : MonoBehaviour
 
         if (isTouch)
         {
-            transform.position = new Vector3(transform.position.x +minSpeed*Time.deltaTime, transform.position.y ,transform.position.z);
+            transform.position = new Vector3(transform.position.x +_touchSpeed*Time.deltaTime, transform.position.y ,transform.position.z);
 
 
         }
 
         else
         {
-            if (distanceToPlayer < 5f)
+            if (distanceToPlayer < 40f)
             {
                 //transform.position = Vector2.MoveTowards(transform.position, target.transform.position, minSpeed * Time.deltaTime);
-                _currentSpeed = minSpeed;
+                _currentSpeed = _minSpeed;
                 Mouvement(_currentSpeed);
             }
             else
             {
                 //transform.position = Vector2.MoveTowards(transform.position, target.transform.position, maxSpeed * Time.deltaTime);
-                _currentSpeed = maxSpeed;
+                _currentSpeed = _maxSpeed;
                 Mouvement(_currentSpeed);
             }
         }
@@ -66,12 +71,15 @@ public class EnnemyFollowerV2 : MonoBehaviour
             Debug.Log("Touché");
             
             isTouch = true;
-            gameObject.layer = 7;
+            _collider2d.enabled = false;
             CameraShake.instance.ShakeCamera(_shakingForce, _shakingTime);
-            StartCoroutine(Disparition());
+            StartCoroutine(WaitDestroy());
+            
         }
 
     }
+
+   
 
 
     IEnumerator Disparition()
@@ -106,4 +114,9 @@ public class EnnemyFollowerV2 : MonoBehaviour
         Mouvement(_currentSpeed);
     }
 
+    IEnumerator WaitDestroy()
+    {
+        yield return new WaitForSeconds(1f);
+        Destroy(gameObject);
+    }
 }

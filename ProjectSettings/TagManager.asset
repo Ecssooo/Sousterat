@@ -11,6 +11,7 @@ TagManager:
   - Calcite
   - Edge
   - Dirt
+  - Ennemy
   layers:
   - Default
   - TransparentFX
