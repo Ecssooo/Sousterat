@@ -40,7 +40,7 @@ public class RadarPulse : MonoBehaviour
         RaycastHit2D[] raycastHit2DArray= Physics2D.CircleCastAll(transform.position, range/2f, Vector2.zero);
         foreach (RaycastHit2D raycastHit2D in raycastHit2DArray)
         {
-            if (raycastHit2D.collider.CompareTag("RadarMark"))
+            if (raycastHit2D.collider.CompareTag("Ennemy"))
             {
 
                 if (raycastHit2D.collider != null)
