@@ -7,8 +7,8 @@ public class RockDetector : MonoBehaviour
     [SerializeField] private LevelSpeedManager _levelSpeedManager;
     [SerializeField] private ActiveRotationHoraire _rotationHoraire;
     [SerializeField] private ActiveRotationAHoraire _rotationAntiHoraire;
-    
-    
+
+    [SerializeField] private SASManager _sasManager;
     void Update()
     {
         
@@ -20,18 +20,22 @@ public class RockDetector : MonoBehaviour
             if (hit.collider.gameObject.tag == "Charbon")
             {
                 _levelSpeedManager.mineState = LevelSpeedManager.MineState.Coal;
+                _sasManager.mineCoal = true;
             }
             else if (hit.collider.gameObject.tag == "Calcite")
             {
                 _levelSpeedManager.mineState = LevelSpeedManager.MineState.Calcite;
+                _sasManager.mineCoal = false;
             }
             else if (hit.collider.gameObject.tag == "Granite")
             {
                 _levelSpeedManager.mineState = LevelSpeedManager.MineState.Granite;
+                _sasManager.mineCoal = false;
             }
             else if (hit.collider.gameObject.tag == "Dirt")
             {
                 _levelSpeedManager.mineState = LevelSpeedManager.MineState.Dirt;
+                _sasManager.mineCoal = false;
             }
             else if (hit.collider.gameObject.tag == "Edge")
             {
