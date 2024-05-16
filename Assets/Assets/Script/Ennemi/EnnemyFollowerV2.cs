@@ -6,29 +6,30 @@ using UnityEngine;
 public class EnnemyFollowerV2 : MonoBehaviour
 {
 
-    [Header("Paramètres Shaking")]
+    [Header("Paramï¿½tres Shaking")]
     [SerializeField] private float _shakingForce;
     [SerializeField] private float _shakingTime;
 
-    [Header("Paramètres Vitesse")]
+    [Header("Paramï¿½tres Vitesse")]
     [SerializeField] float _minSpeed = 2.0f;  
     [SerializeField] float _maxSpeed = 5.0f;
     [SerializeField] float _touchSpeed;
     [SerializeField] float _burstSpeed;
     [SerializeField] private bool isTouch=false;
 
-    [Header("Paramètres du cible")]
+    [Header("Paramï¿½tres du cible")]
     [SerializeField] private GameObject target;
     [SerializeField] private BoxCollider2D _collider2d;
 
-
+    [Header("Parametre de la foreuse")] 
+    [SerializeField] private LevelSpeedManager _levelSpeedManager;
+    [SerializeField] private RockDetector _rockDetector;
+    [SerializeField] private float _fuelLost;
+    
+    
     private float _currentSpeed;
     private float directionX;
     private float directionY;
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
     void Update()
@@ -68,20 +69,19 @@ public class EnnemyFollowerV2 : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            Debug.Log("Touché");
+            Debug.Log("Touchï¿½");
             
             isTouch = true;
             _collider2d.enabled = false;
             CameraShake.instance.ShakeCamera(_shakingForce, _shakingTime);
-           StartCoroutine(WaitDestroy());
+            _rockDetector._RandomRotation();
+            _levelSpeedManager.fuelTank -= _fuelLost;
+            StartCoroutine(WaitDestroy());
             
         }
 
     }
-
-   
-
-
+    
     IEnumerator Disparition()
     {
         gameObject.GetComponent<SpriteRenderer>().enabled = false;

@@ -7,13 +7,15 @@ public class Burst : MonoBehaviour
 {
     [Header("LevelSpeed")] 
     [SerializeField] private LevelSpeedManager _levelSpeedManager;
-
+    
     [Header("Burst stats")]
     [SerializeField] private float _burstSpeed;
     [SerializeField] private float _burstDuration;
     [SerializeField] private float _burstConsumption;
     public float _burstCooldown;
 
+    [Header("UI")] [SerializeField] private Animator _animator;
+    
     public bool _isBurst = false;
     private bool _isTrigger;
     private void Update()
@@ -52,11 +54,13 @@ public class Burst : MonoBehaviour
         _burstCooldown += Time.deltaTime;
         if (_burstCooldown <= _burstDuration)
         {
+            _animator.SetBool("IsBurst", true);
             _levelSpeedManager.levelSpeed = _burstSpeed;
             _levelSpeedManager.fuelConsumption = _burstConsumption;
         }
         else
         {
+            _animator.SetBool("IsBurst", false);
             _isBurst = false;
             _burstCooldown = 0f;
             _levelSpeedManager.levelSpeed = _levelSpeedManager.InitLevelSpeed;

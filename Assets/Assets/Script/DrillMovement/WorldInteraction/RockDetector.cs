@@ -46,7 +46,7 @@ public class RockDetector : MonoBehaviour
         }
     }
 
-    private void _RandomRotation()
+    public void _RandomRotation()
     {
         int randomNumber = Random.Range(1, 2);
         if (randomNumber == 1)
