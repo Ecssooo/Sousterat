@@ -5,8 +5,10 @@ using UnityEngine;
 public class Snake : MonoBehaviour
 {
     [SerializeField] private Transform[] _waypoints;
+    [SerializeField] private Transform[] _waypointsFlip;
     [SerializeField] private float moveSpeed = 2f;
     [SerializeField] private float closeEnoughThreshold = 0.3f;
+    [SerializeField] private SpriteRenderer _spriteRenderer;
 
     private Transform _target;
     private int _destPoint = 0;
@@ -25,6 +27,13 @@ public class Snake : MonoBehaviour
 
         if(Vector3.Distance(transform.position, _target.position) < closeEnoughThreshold)
         {
+            foreach(Transform t in _waypointsFlip)
+            {
+                if(t==_target)
+                {
+                    _spriteRenderer.flipX = !_spriteRenderer.flipX;
+                }
+            }
             _destPoint = (_destPoint+1) % _waypoints.Length;
             _target= _waypoints[_destPoint];
         }

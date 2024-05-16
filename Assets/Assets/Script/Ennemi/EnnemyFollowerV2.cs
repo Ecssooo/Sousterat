@@ -73,7 +73,7 @@ public class EnnemyFollowerV2 : MonoBehaviour
             isTouch = true;
             _collider2d.enabled = false;
             CameraShake.instance.ShakeCamera(_shakingForce, _shakingTime);
-            StartCoroutine(WaitDestroy());
+           StartCoroutine(WaitDestroy());
             
         }
 
