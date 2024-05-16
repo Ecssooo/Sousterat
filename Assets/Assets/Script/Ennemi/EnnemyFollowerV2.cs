@@ -5,6 +5,10 @@ using UnityEngine;
 
 public class EnnemyFollowerV2 : MonoBehaviour
 {
+    [Header("Parametre durée de vie")]
+    [SerializeField] private float _ennemyDuration = 5f;
+    [SerializeField] private float _timer;
+
 
     [Header("Param�tres Shaking")]
     [SerializeField] private float _shakingForce;
@@ -16,6 +20,7 @@ public class EnnemyFollowerV2 : MonoBehaviour
     [SerializeField] float _touchSpeed;
     [SerializeField] float _burstSpeed;
     [SerializeField] private bool isTouch=false;
+    
 
     [Header("Param�tres du cible")]
     [SerializeField] private GameObject target;
@@ -30,36 +35,47 @@ public class EnnemyFollowerV2 : MonoBehaviour
     private float _currentSpeed;
     private float directionX;
     private float directionY;
+    
 
     // Update is called once per frame
     void Update()
     {
-         directionX = Mathf.Sign(target.transform.position.x - transform.position.x);
-         directionY = Mathf.Sign(target.transform.position.y - transform.position.y);
-        float distanceToPlayer = Vector2.Distance(transform.position, target.transform.position);  // Distance au joueur
+        _timer += Time.deltaTime;
 
-        if (isTouch)
+        if(_timer >= _ennemyDuration)
         {
-            transform.position = new Vector3(transform.position.x +_touchSpeed*Time.deltaTime, transform.position.y ,transform.position.z);
-
-
+            StartCoroutine(WaitDestroy());
         }
-
         else
         {
-            if (distanceToPlayer < 40f)
+            directionX = Mathf.Sign(target.transform.position.x - transform.position.x);
+            directionY = Mathf.Sign(target.transform.position.y - transform.position.y);
+            float distanceToPlayer = Vector2.Distance(transform.position, target.transform.position);  // Distance au joueur
+
+            if (isTouch)
             {
-                //transform.position = Vector2.MoveTowards(transform.position, target.transform.position, minSpeed * Time.deltaTime);
-                _currentSpeed = _minSpeed;
-                Mouvement(_currentSpeed);
+                transform.position = new Vector3(transform.position.x + _touchSpeed * Time.deltaTime, transform.position.y, transform.position.z);
+
+
             }
+
             else
             {
-                //transform.position = Vector2.MoveTowards(transform.position, target.transform.position, maxSpeed * Time.deltaTime);
-                _currentSpeed = _maxSpeed;
-                Mouvement(_currentSpeed);
+                if (distanceToPlayer < 40f)
+                {
+                    //transform.position = Vector2.MoveTowards(transform.position, target.transform.position, minSpeed * Time.deltaTime);
+                    _currentSpeed = _minSpeed;
+                    Mouvement(_currentSpeed);
+                }
+                else
+                {
+                    //transform.position = Vector2.MoveTowards(transform.position, target.transform.position, maxSpeed * Time.deltaTime);
+                    _currentSpeed = _maxSpeed;
+                    Mouvement(_currentSpeed);
+                }
             }
         }
+         
        
        
     }
