@@ -317,6 +317,7 @@ public class HeroEntity : MonoBehaviour
             {
                 _orientX *= -1;
                 _horizontalSpeed += settings.jumpSpeed * _orientX;
+                Debug.Log(_horizontalSpeed);
             }
         }
         else
@@ -368,7 +369,7 @@ public class HeroEntity : MonoBehaviour
     {
         if (_orientX == 1f)
             IsTouchingWall = _wallDetector.DetectWallNearByRight();
-        if (_orientX == -1f)
+        if (_orientX == -1f && _jumpState != JumpState.JumpImplusion)
         {
             IsTouchingWall = _wallDetector.DetectWallNearByLeft();
         }

@@ -66,7 +66,7 @@ public class LevelMouvement : MonoBehaviour
             _ResetPlateformColliderSense(_plateformX);
             _SetPlateformCollider(_plateformY, _plateformX);
             FuelUsed();
-            _SetWallRaycastLenght(0.2f);
+            _SetWallRaycastLenght(0.1f);
             _SetGroundRaycastLenght(0.05f);
             transform.position = new Vector2(transform.position.x + _levelSpeedManager.levelSpeed, transform.position.y);
         }
@@ -75,7 +75,7 @@ public class LevelMouvement : MonoBehaviour
             _SetPlateformColliderSense(_plateformX);
             _SetPlateformCollider(_plateformY, _plateformX);
             FuelUsed();
-            _SetWallRaycastLenght(0.2f);
+            _SetWallRaycastLenght(0.1f);
             _SetGroundRaycastLenght(0.05f);
             transform.position = new Vector2(transform.position.x - _levelSpeedManager.levelSpeed, transform.position.y);
         }
@@ -85,7 +85,7 @@ public class LevelMouvement : MonoBehaviour
             _SetPlateformColliderSense(_plateformY);
             _SetPlateformCollider(_plateformX, _plateformY);
             FuelUsed();
-            _SetWallRaycastLenght(0.2f);
+            _SetWallRaycastLenght(0.1f);
             _SetGroundRaycastLenght(0.1f);
             transform.position = new Vector2(transform.position.x, transform.position.y + _levelSpeedManager.levelSpeed);
             
@@ -95,7 +95,7 @@ public class LevelMouvement : MonoBehaviour
             _ResetPlateformColliderSense(_plateformY);
             _SetPlateformCollider(_plateformX, _plateformY);
             FuelUsed();
-            _SetWallRaycastLenght(0.2f);
+            _SetWallRaycastLenght(0.1f);
             _SetGroundRaycastLenght(0.01f);
             transform.position = new Vector2(transform.position.x, transform.position.y - _levelSpeedManager.levelSpeed);
         }
