@@ -20,6 +20,9 @@ public class CameraZoom : MonoBehaviour
     [SerializeField] private float _multiplySpeed;
     [SerializeField] private float _multiplyFuelConsumption;
 
+    [SerializeField] private Transform _enemyTarget;
+    [SerializeField] private Transform _drillTarget;
+
     private void Awake()
     {
         _camera.m_Lens.OrthographicSize = _zoomMin;
@@ -75,7 +78,8 @@ public class CameraZoom : MonoBehaviour
         if (zoomCooldown >= zoomTimer)
         {
             _camera.m_Lens.OrthographicSize = Mathf.Lerp(_camera.m_Lens.OrthographicSize, _zoomMin, 0.1f);
-            if (_camera.m_Lens.OrthographicSize == _zoomMin)
+            _camera.Follow = _drillTarget;
+            if (_camera.m_Lens.OrthographicSize <= _zoomMin)
             {
                 Chekcpoint.zoomAvailable = false;
                 zoomCooldown = 0;
@@ -86,6 +90,7 @@ public class CameraZoom : MonoBehaviour
             if (_camera.m_Lens.OrthographicSize <= _zoomMax && zoomCooldown <= zoomTimer)
             {
                 _camera.m_Lens.OrthographicSize = Mathf.Lerp(_camera.m_Lens.OrthographicSize, _zoomMax, Time.deltaTime * _velocity);
+                _camera.Follow = _enemyTarget;
             }
         }
 

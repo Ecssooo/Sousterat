@@ -39,6 +39,7 @@ public class RockDetector : MonoBehaviour
             else if (hit.collider.gameObject.tag == "Edge")
             {
                 _RandomRotation();
+                AudioManager.Instance.PlaySFX(AudioManager.Instance.collision_3SFX);
             }else if (hit.collider.gameObject.tag == "Ennemy")
             {
                 _levelSpeedManager.mineState = LevelSpeedManager.MineState.Enemy;

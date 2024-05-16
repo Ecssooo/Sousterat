@@ -88,6 +88,7 @@ public class EnnemyFollowerV2 : MonoBehaviour
             Debug.Log("Touch�");
             
             isTouch = true;
+            AudioManager.Instance.PlaySFX(AudioManager.Instance.collision_1SFX);
             _collider2d.enabled = false;
             CameraShake.instance.ShakeCamera(_shakingForce, _shakingTime);
             _rockDetector._RandomRotation();

@@ -29,6 +29,7 @@ public class SASManager : MonoBehaviour
             {
                 if (Input.GetKeyDown(KeyCode.E))
                 {
+                AudioManager.Instance.PlaySFX(AudioManager.Instance.charbonSFX);
                     _coal.SetActive(false);
                     playerHasCoal = true;
                     hasPlayed = false;

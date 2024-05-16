@@ -33,8 +33,9 @@ public class ActiveRotationAHoraire : MonoBehaviour
         //Si c'est le cas, le joueur peut appuyer sur E pour activer la rotation
         if(isTrigger)
         {
-            if(Input.GetKeyDown(KeyCode.E))
+            if(Input.GetKeyDown(KeyCode.E) && !isRotating)
             {
+                
                 StartRotation();
             }
         }
@@ -62,6 +63,7 @@ public class ActiveRotationAHoraire : MonoBehaviour
     {
         if (!isRotating)
         {
+            AudioManager.Instance.PlaySFX(AudioManager.Instance.rotationSFX);
             StartCoroutine(Rotate(new Vector3(0, 0, 90), 1));
         }
     }

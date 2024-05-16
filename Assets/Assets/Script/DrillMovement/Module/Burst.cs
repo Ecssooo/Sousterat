@@ -54,6 +54,7 @@ public class Burst : MonoBehaviour
         _burstCooldown += Time.deltaTime;
         if (_burstCooldown <= _burstDuration)
         {
+            AudioManager.Instance.PlaySFX(AudioManager.Instance.burstSFX);
             _animator.SetBool("IsBurst", true);
             _levelSpeedManager.levelSpeed = _burstSpeed;
             _levelSpeedManager.fuelConsumption = _burstConsumption;

@@ -84,6 +84,18 @@ public class LevelSpeedManager : MonoBehaviour
             _lastMineState = mineState;
             _UpdateLevelSpeed();
         }
+        if (_fuelTankState == FuelTankState.Quarter)
+        {
+            AudioManager.Instance.PlaySFX(AudioManager.Instance.end_fuelSFX);
+
+        }
+        else
+        {
+            
+            //AudioManager.Instance.StopSFX();
+            AudioManager.Instance.PlaySFX(AudioManager.Instance.end_fuelSFX);
+        }
+
     }
     
     private void _UpdateLevelSpeed()

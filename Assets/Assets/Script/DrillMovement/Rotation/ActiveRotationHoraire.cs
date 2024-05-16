@@ -35,6 +35,7 @@ public class ActiveRotationHoraire : MonoBehaviour
         {
             if(Input.GetKeyDown(KeyCode.E))
             {
+                AudioManager.Instance.PlaySFX(AudioManager.Instance.rotationSFX);
                 StartRotation();
             }
         }
