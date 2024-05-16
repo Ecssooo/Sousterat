@@ -14,6 +14,8 @@ public class CameraZoom : MonoBehaviour
     private float _zoom;
     private bool _initialZoomDone = false;
 
+    public static CameraZoom Instance { get; private set; }
+
     [SerializeField] private LevelSpeedManager _levelSpeedManager;
     [SerializeField] private float _multiplySpeed;
     [SerializeField] private float _multiplyFuelConsumption;
@@ -66,11 +68,15 @@ public class CameraZoom : MonoBehaviour
        
     }
 
-   IEnumerator AutoZoom()
+   public IEnumerator AutoZoom(float _zoomMin,float _zoomMax)
     {
         _camera.m_Lens.OrthographicSize = Mathf.Lerp(_camera.m_Lens.OrthographicSize, _zoomMax, Time.deltaTime * _velocity);
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
         _camera.m_Lens.OrthographicSize = Mathf.Lerp(_camera.m_Lens.OrthographicSize, _zoomMin, Time.deltaTime * _velocity);
 
+    }
+    public void CheckPointZoom(float _zoomMin,float _zoomMax)
+    {
+        StartCoroutine(AutoZoom(_zoomMin,_zoomMax));
     }
 }

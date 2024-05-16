@@ -116,7 +116,10 @@ public class EnnemyFollowerV2 : MonoBehaviour
 
     IEnumerator WaitDestroy()
     {
+        
         yield return new WaitForSeconds(1f);
-        Destroy(gameObject);
+        _collider2d.enabled = true;
+        gameObject.SetActive(false);
+        isTouch = false;
     }
 }
