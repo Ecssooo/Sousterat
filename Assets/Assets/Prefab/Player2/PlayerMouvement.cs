@@ -49,6 +49,14 @@ public class PlayerMouvement : MonoBehaviour
     public void Update()
     {
         horizontal = Input.GetAxisRaw("Horizontal");
+        if (_sasManager.playerHasCoal)
+        {
+            _animator.SetBool("PlayerHasCoal", true);
+        }
+        else
+        {
+            _animator.SetBool("PlayerHasCoal",false);
+        }
         
         //Permet de sauter quand le joueur appuie sur la touche saut et qu'il est au sol
         if(Input.GetButtonDown("Jump") && IsGrounded())
