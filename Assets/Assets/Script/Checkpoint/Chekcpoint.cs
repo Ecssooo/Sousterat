@@ -11,7 +11,7 @@ public class Chekcpoint : MonoBehaviour
     [Header("Paramètres Auto-Zoom")]
     [SerializeField] private float _zoomMin;
     [SerializeField] private float _zoomMax;
-   
+    public static bool zoomAvailable;
     
     void Start()
     {
@@ -21,7 +21,11 @@ public class Chekcpoint : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (zoomAvailable)
+        {
+            _zoom.AutoZoom(_zoomMin,_zoomMax);
+            _zoom.zoomCooldown += Time.deltaTime;
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -31,7 +35,7 @@ public class Chekcpoint : MonoBehaviour
           _ennemyDrill.SetActive(true);
             Vector3 spawnPosition = _waypoint.position;
             _ennemyDrill.transform.position = spawnPosition;
-            _zoom.CheckPointZoom(_zoomMin,_zoomMax);
+            zoomAvailable = true;
         };
     }
 }

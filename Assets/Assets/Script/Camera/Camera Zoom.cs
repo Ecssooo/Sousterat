@@ -68,15 +68,27 @@ public class CameraZoom : MonoBehaviour
        
     }
 
-   public IEnumerator AutoZoom(float _zoomMin,float _zoomMax)
+    public float zoomTimer;
+    public float zoomCooldown;
+   public void AutoZoom(float _zoomMin,float _zoomMax)
     {
-        _camera.m_Lens.OrthographicSize = Mathf.Lerp(_camera.m_Lens.OrthographicSize, _zoomMax, Time.deltaTime * _velocity);
-        yield return new WaitForSeconds(1f);
-        _camera.m_Lens.OrthographicSize = Mathf.Lerp(_camera.m_Lens.OrthographicSize, _zoomMin, Time.deltaTime * _velocity);
+        if (zoomCooldown >= zoomTimer)
+        {
+            _camera.m_Lens.OrthographicSize = Mathf.Lerp(_camera.m_Lens.OrthographicSize, _zoomMin, 0.1f);
+            if (_camera.m_Lens.OrthographicSize == _zoomMin)
+            {
+                Chekcpoint.zoomAvailable = false;
+                zoomCooldown = 0;
+            }
+        }
+        else
+        {
+            if (_camera.m_Lens.OrthographicSize <= _zoomMax && zoomCooldown <= zoomTimer)
+            {
+                _camera.m_Lens.OrthographicSize = Mathf.Lerp(_camera.m_Lens.OrthographicSize, _zoomMax, Time.deltaTime * _velocity);
+            }
+        }
 
     }
-    public void CheckPointZoom(float _zoomMin,float _zoomMax)
-    {
-        StartCoroutine(AutoZoom(_zoomMin,_zoomMax));
-    }
+
 }
