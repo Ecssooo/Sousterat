@@ -8,30 +8,28 @@ public class SASManager : MonoBehaviour
     [Header("SAS GameObject")]
     [SerializeField] private GameObject _coal;
 
-    [Header("Timer")] 
-    [SerializeField] private float _coalRespawnTimer;
-
     [Header("Animator")] [SerializeField] private Animator _animator;
+    private bool hasPlayed;
 
+    [Header("CoalManager")]
+    [SerializeField] private float _coalRespawnTimer;
+    [SerializeField] private int _maxCoalAvailable;
     public int _coalAvailable = 0;
+    public bool mineCoal;
+    public bool playerHasCoal;
     
     private float _coalRespawnCooldown;
-    private bool _coalHere;
-    public bool mineCoal;
     
     private bool isTrigger;
-    public bool playerHasCoal;
 
-    private bool hasPlayed;
     private void Update()
     {
-        _CheckCoal();
+
             if(isTrigger && !playerHasCoal)
             {
                 if (Input.GetKeyDown(KeyCode.E))
                 {
                     _coal.SetActive(false);
-                    _coalHere = false;
                     playerHasCoal = true;
                     hasPlayed = false;
                     _coalAvailable--;
@@ -55,9 +53,11 @@ public class SASManager : MonoBehaviour
             if (_coalRespawnCooldown > _coalRespawnTimer)
             {
                 _coalRespawnCooldown = 0;
-                _coalHere = true;
                 _coal.SetActive(true);
-                _coalAvailable++;
+                if (_coalAvailable + 1 <= _maxCoalAvailable)
+                {
+                    _coalAvailable++;
+                }
                 if (!hasPlayed)
                 {
                     _animator.SetTrigger("Spawn");
@@ -68,15 +68,6 @@ public class SASManager : MonoBehaviour
                     }
                 }
             }
-        }
-        
-    }
-
-    private void _CheckCoal()
-    {
-        if (!_coal.activeInHierarchy)
-        {
-            _coalHere = false;
         }
     }
     

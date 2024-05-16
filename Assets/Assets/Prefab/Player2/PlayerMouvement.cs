@@ -54,12 +54,28 @@ public class PlayerMouvement : MonoBehaviour
         if(Input.GetButtonDown("Jump") && IsGrounded())
         {
             rb.velocity = new Vector2(rb.velocity.x, PlayerJumpPower);
+            if (_sasManager.playerHasCoal)
+            {
+                _animator.SetTrigger("Jump");
+            }
+            else
+            {
+                _animator.SetTrigger("Jump");
+            }
         }
 
         //Modifie la hauteur du saut en fonction du temps que le joueur appuie sur la touche saut
         if(Input.GetButtonUp("Jump") && rb.velocity.y > 0)
         {
             rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * MaxPlayerJumpPower);
+            if (_sasManager.playerHasCoal)
+            {
+                _animator.SetTrigger("Jump");
+            }
+            else
+            {
+                _animator.SetTrigger("Jump");
+            }
         }
 
         WallSliding();
@@ -75,16 +91,32 @@ public class PlayerMouvement : MonoBehaviour
     private void FixedUpdate()
     {
         //Déplacer le joueur en fonction de la touche appuyée (Q ou D || fléche directionnel)
-        if (!IsWallJumping)
+        if (!IsWallJumping || IsWalled())
         {
             rb.velocity = new Vector2(horizontal * PlayerSpeed, rb.velocity.y);
-            if (horizontal == 0)
+            if (horizontal != 0)
             {
-                _animator.SetBool("Walk", false);
+                if (_sasManager.playerHasCoal)
+                {
+                    _animator.SetBool("WalkCoal",true);
+                }
+                else
+                {
+                    _animator.SetBool("Walk",true);
+
+                }
             }
             else
             {
-                _animator.SetBool("Walk",true);
+                if (_sasManager.playerHasCoal)
+                {
+                    _animator.SetBool("WalkCoal",false);
+                }
+                else
+                {
+                    _animator.SetBool("Walk",false);
+
+                }
             }
         }
     }
@@ -98,13 +130,13 @@ public class PlayerMouvement : MonoBehaviour
     //Permet de savoir si le joueur est contre un mur
     private bool IsWalled()
     {
-        return Physics2D.OverlapCircle(wallCheck.position, 0.2f, wallLayer);
+        return Physics2D.OverlapCircle(wallCheck.position, 0.3f, wallLayer);
     }
 
     //Gére le wallslide
     private void WallSliding()
     {
-        if(IsWalled() && !IsGrounded() && horizontal != 0)
+        if(IsWalled() && !IsGrounded())
         {
             IsWallSliding = true;
             rb.velocity = new Vector2(rb.velocity.x, Mathf.Clamp(rb.velocity.y, -PlayerWallSlidingSpeed, float.MaxValue));
@@ -113,8 +145,37 @@ public class PlayerMouvement : MonoBehaviour
         {
             IsWallSliding = false;
         } 
+        WallSlideAnimation(IsWallSliding);
     }
 
+    private void WallSlideAnimation(bool WallSliding)
+    {
+        if (WallSliding)
+        {
+            if (_sasManager.playerHasCoal)
+            {
+                _animator.SetBool("WallSlideCoal",true);
+            }
+            else
+            {
+                _animator.SetBool("WallSlide",true);
+
+            }
+        }
+        else
+        {
+            if (_sasManager.playerHasCoal)
+            {
+                _animator.SetBool("WallSlideCoal",false);
+            }
+            else
+            {
+                _animator.SetBool("WallSlide",false);
+
+            }
+        }
+    }
+    
     //Gére le walljump
     private void WallJump()
     {
@@ -123,7 +184,6 @@ public class PlayerMouvement : MonoBehaviour
             IsWallJumping = false;
             wallJumpingDirection = -transform.localScale.x;
             wallJumpingCounter = wallJumpingTimer;
-
             CancelInvoke(nameof(StopWallJumping));
         }
         else
@@ -135,8 +195,7 @@ public class PlayerMouvement : MonoBehaviour
             IsWallJumping = true;
             rb.velocity = new Vector2(wallJumpingDirection * wallJumpingPower.x, wallJumpingPower.y);
             wallJumpingCounter = 0f;
-
-
+            
             if(transform.localScale.x != wallJumpingDirection)
             {
                 IsFacingRight = !IsFacingRight;

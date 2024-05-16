@@ -34,6 +34,9 @@ public class LevelSpeedManager : MonoBehaviour
     [SerializeField] private float MultiplierForGranite;
     [Tooltip("Float for percentage (0-1)")]
     [SerializeField] private float MultiplierForCalcite;
+    [Tooltip("Float for percentage (0-1)")]
+    [SerializeField] private float MultiplierForEnemy;
+    
     
     [Header("Fuel Tank")]
     [Tooltip("Float for fuel level (0-100)")]
@@ -58,7 +61,8 @@ public class LevelSpeedManager : MonoBehaviour
         Dirt,
         Coal,
         Granite,
-        Calcite
+        Calcite,
+        Enemy
     }
 
     private MineState _lastMineState;
@@ -115,6 +119,9 @@ public class LevelSpeedManager : MonoBehaviour
                 break;
             case MineState.Calcite:
                 CurrentLevelSpeed = InitLevelSpeed * MultiplierForCalcite;
+                break;
+            case MineState.Enemy:
+                CurrentLevelSpeed = InitLevelSpeed * MultiplierForEnemy;
                 break;
         }
     }

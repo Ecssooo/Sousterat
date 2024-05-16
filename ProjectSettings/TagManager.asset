@@ -12,6 +12,7 @@ TagManager:
   - Edge
   - Dirt
   - Ennemy
+  - Ver
   layers:
   - Default
   - TransparentFX
