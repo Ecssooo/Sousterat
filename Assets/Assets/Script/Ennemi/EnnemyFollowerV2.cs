@@ -7,7 +7,7 @@ public class EnnemyFollowerV2 : MonoBehaviour
 {
     [Header("Parametre durée de vie")]
     [SerializeField] private float _ennemyDuration = 5f;
-    [SerializeField] private float _timer;
+    public static float _timer;
 
 
     [Header("Param�tres Shaking")]
@@ -41,7 +41,6 @@ public class EnnemyFollowerV2 : MonoBehaviour
     void Update()
     {
         _timer += Time.deltaTime;
-
         if(_timer >= _ennemyDuration)
         {
             StartCoroutine(WaitDestroy());

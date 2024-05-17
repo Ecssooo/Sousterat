@@ -8,7 +8,7 @@ public class ActiveRotationHoraire : MonoBehaviour
     [SerializeField] private Transform grid;
     
     private bool isTrigger = false;
-    private bool isRotating = false;
+    public static bool IsRotating = false;
     
     void OnTriggerEnter2D(Collider2D truc)
     {
@@ -35,7 +35,6 @@ public class ActiveRotationHoraire : MonoBehaviour
         {
             if(Input.GetKeyDown(KeyCode.E))
             {
-                AudioManager.Instance.PlaySFX(AudioManager.Instance.rotationSFX);
                 StartRotation();
             }
         }
@@ -44,7 +43,7 @@ public class ActiveRotationHoraire : MonoBehaviour
     //Fonction qui permet de faire tourner le niveau de 90�
     private IEnumerator Rotate(Vector3 angles, float duration)
     {
-        isRotating = true;
+        IsRotating = true;
         Quaternion startRotation = grid.transform.rotation;
         Quaternion endRotation = Quaternion.Euler(angles) * startRotation;
 
@@ -55,15 +54,16 @@ public class ActiveRotationHoraire : MonoBehaviour
         }
 
         grid.transform.rotation = endRotation;
-        isRotating = false;
+        IsRotating = false;
     }
 
     //Fonction qui permet de lancer la rotation
     public void StartRotation()
     {
-        if (!isRotating)
+        if (!IsRotating)
         {
             StartCoroutine(Rotate(new Vector3(0, 0, -90), 1));
+            AudioManager.Instance.PlaySFX(AudioManager.Instance.rotationSFX);
         }
     }
 }

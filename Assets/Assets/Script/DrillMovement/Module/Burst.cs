@@ -7,6 +7,7 @@ public class Burst : MonoBehaviour
 {
     [Header("LevelSpeed")] 
     [SerializeField] private LevelSpeedManager _levelSpeedManager;
+    [SerializeField] private CameraShake _cameraShake;
     
     [Header("Burst stats")]
     [SerializeField] private float _burstSpeed;
@@ -25,6 +26,11 @@ public class Burst : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.E))
             {
                 _isBurst = true;
+                if (_levelSpeedManager.fuelTank <= _burstConsumption)
+                {
+                    _isBurst = false;
+                    _cameraShake.ShakeCamera(1.5f, 0.2f);
+                }
             }
         }
 

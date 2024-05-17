@@ -9,7 +9,7 @@ public class ActiveRotationAHoraire : MonoBehaviour
 
 
     private bool isTrigger = false;
-    private bool isRotating = false;
+    
     void OnTriggerEnter2D(Collider2D truc)
     {
         //Si le joueur est en contact avec le bouton
@@ -33,7 +33,7 @@ public class ActiveRotationAHoraire : MonoBehaviour
         //Si c'est le cas, le joueur peut appuyer sur E pour activer la rotation
         if(isTrigger)
         {
-            if(Input.GetKeyDown(KeyCode.E) && !isRotating)
+            if(Input.GetKeyDown(KeyCode.E) && !ActiveRotationHoraire.IsRotating)
             {
                 
                 StartRotation();
@@ -44,7 +44,7 @@ public class ActiveRotationAHoraire : MonoBehaviour
     //Fonction qui permet de faire tourner le niveau de 90�
     private IEnumerator Rotate(Vector3 angles, float duration)
     {
-        isRotating = true;
+        ActiveRotationHoraire.IsRotating = true;
         Quaternion startRotation = grid.transform.rotation;
         Quaternion endRotation = Quaternion.Euler(angles) * startRotation;
 
@@ -55,16 +55,16 @@ public class ActiveRotationAHoraire : MonoBehaviour
         }
 
         grid.transform.rotation = endRotation;
-        isRotating = false;
+        ActiveRotationHoraire.IsRotating = false;
     }
 
     //Fonction qui permet de lancer la rotation
     public void StartRotation()
     {
-        if (!isRotating)
+        if (!ActiveRotationHoraire.IsRotating)
         {
-            AudioManager.Instance.PlaySFX(AudioManager.Instance.rotationSFX);
             StartCoroutine(Rotate(new Vector3(0, 0, 90), 1));
+            AudioManager.Instance.PlaySFX(AudioManager.Instance.rotationSFX);
         }
     }
 }

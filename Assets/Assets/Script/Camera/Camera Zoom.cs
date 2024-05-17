@@ -24,6 +24,7 @@ public class CameraZoom : MonoBehaviour
     [SerializeField] private Transform _drillTarget;
 
     [Header("Paramètres Auto-Zoom")]
+    [SerializeField] private GameObject _checkPoint;
     public float zoomTimer;
     public float zoomCooldown;
     private void Awake()
@@ -88,6 +89,7 @@ public class CameraZoom : MonoBehaviour
             {
                 Chekcpoint.zoomAvailable = false;
                 zoomCooldown = 0;
+                _checkPoint.SetActive(false);
             }
         }
         else

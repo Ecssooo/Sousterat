@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Chekcpoint : MonoBehaviour
@@ -7,7 +8,8 @@ public class Chekcpoint : MonoBehaviour
     [SerializeField] GameObject _ennemyDrill;
     [SerializeField] Transform _waypoint;
     [SerializeField] CameraZoom _zoom;
-
+   
+    
     [Header("Paramètres Auto-Zoom")]
     [SerializeField] private float _zoomMin;
     [SerializeField] private float _zoomMax;
@@ -37,10 +39,11 @@ public class Chekcpoint : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-          _ennemyDrill.SetActive(true);
+            _ennemyDrill.SetActive(true);
             Vector3 spawnPosition = _waypoint.position;
             _ennemyDrill.transform.position = spawnPosition;
             zoomAvailable = true;
+            EnnemyFollowerV2._timer = 0f;
         };
     }
 }
