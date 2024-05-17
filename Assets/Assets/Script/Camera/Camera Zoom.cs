@@ -23,6 +23,9 @@ public class CameraZoom : MonoBehaviour
     [SerializeField] private Transform _enemyTarget;
     [SerializeField] private Transform _drillTarget;
 
+    [Header("Paramètres Auto-Zoom")]
+    public float zoomTimer;
+    public float zoomCooldown;
     private void Awake()
     {
         _camera.m_Lens.OrthographicSize = _zoomMin;
@@ -42,6 +45,7 @@ public class CameraZoom : MonoBehaviour
        
         if (Input.GetKeyDown(KeyCode.Q))
         {
+            
             _initialZoomDone=true;
             
             if (!_cameraZoom)
@@ -71,26 +75,29 @@ public class CameraZoom : MonoBehaviour
        
     }
 
-    public float zoomTimer;
-    public float zoomCooldown;
+    
+
+
    public void AutoZoom(float _zoomMin,float _zoomMax)
     {
         if (zoomCooldown >= zoomTimer)
         {
-            _camera.m_Lens.OrthographicSize = Mathf.Lerp(_camera.m_Lens.OrthographicSize, _zoomMin, 0.1f);
+            _camera.m_Lens.OrthographicSize = Mathf.Lerp(_camera.m_Lens.OrthographicSize, _zoomMin, Time.deltaTime * _velocity);
             _camera.Follow = _drillTarget;
-            if (_camera.m_Lens.OrthographicSize <= _zoomMin)
+            if (_camera.m_Lens.OrthographicSize == _zoomMin)
             {
                 Chekcpoint.zoomAvailable = false;
                 zoomCooldown = 0;
+
             }
         }
         else
         {
-            if (_camera.m_Lens.OrthographicSize <= _zoomMax && zoomCooldown <= zoomTimer)
+            if (_camera.m_Lens.OrthographicSize != _zoomMax && zoomCooldown <= zoomTimer)
             {
                 _camera.m_Lens.OrthographicSize = Mathf.Lerp(_camera.m_Lens.OrthographicSize, _zoomMax, Time.deltaTime * _velocity);
                 _camera.Follow = _enemyTarget;
+                
             }
         }
 

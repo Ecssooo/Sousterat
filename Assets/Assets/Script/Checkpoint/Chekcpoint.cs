@@ -26,6 +26,11 @@ public class Chekcpoint : MonoBehaviour
             _zoom.AutoZoom(_zoomMin,_zoomMax);
             _zoom.zoomCooldown += Time.deltaTime;
         }
+        else
+        {
+            _zoom.zoomCooldown = 0;
+        }
+        
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

@@ -55,7 +55,7 @@ public class EnnemyFollowerV2 : MonoBehaviour
             if (isTouch)
             {
                 transform.position = new Vector3(transform.position.x + _touchSpeed * Time.deltaTime, transform.position.y, transform.position.z);
-
+                
 
             }
 

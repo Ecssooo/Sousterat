@@ -92,7 +92,7 @@ public class LevelSpeedManager : MonoBehaviour
         else
         {
             
-            //AudioManager.Instance.StopSFX();
+            AudioManager.Instance.StopSFX();
             AudioManager.Instance.PlaySFX(AudioManager.Instance.end_fuelSFX);
         }
 
