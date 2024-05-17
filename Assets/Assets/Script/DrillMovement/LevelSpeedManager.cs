@@ -66,7 +66,10 @@ public class LevelSpeedManager : MonoBehaviour
     }
 
     private MineState _lastMineState;
-    
+
+
+    [Header("Vérificateur bool de l'état du moteur")]
+    [SerializeField] private bool _engineLow = false;
     private void Start()
     {
         levelSpeed = InitLevelSpeed;
@@ -86,15 +89,16 @@ public class LevelSpeedManager : MonoBehaviour
         }
         if (_fuelTankState == FuelTankState.Quarter)
         {
-            AudioManager.Instance.PlaySFX(AudioManager.Instance.end_fuelSFX);
+           _engineLow = true;
+            
 
         }
         else
         {
+            _engineLow=false;
             
-            AudioManager.Instance.StopSFX();
-            AudioManager.Instance.PlaySFX(AudioManager.Instance.end_fuelSFX);
         }
+        _EngineSound();
 
     }
     
@@ -157,6 +161,18 @@ public class LevelSpeedManager : MonoBehaviour
         {
             _fuelTankState = FuelTankState.Empty;
             
+        }
+    }
+
+    private void _EngineSound()
+    {
+        if (_engineLow)
+        {
+            AudioManager.Instance.PlayEngine(AudioManager.Instance.end_fuelSFX);
+        }
+        else
+        {
+            AudioManager.Instance.PlayEngine(AudioManager.Instance.engineSFX);
         }
     }
 

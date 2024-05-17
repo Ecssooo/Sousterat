@@ -143,7 +143,7 @@ public class LevelMouvement : MonoBehaviour
         if (_levelSpeedManager.fuelTank <= 0f)
         {
             _levelSpeedManager.fuelTank = 0.1f;
-            AudioManager.Instance.PlaySFX(AudioManager.Instance.end_fuelSFX);
+           
         }
         else
         {
