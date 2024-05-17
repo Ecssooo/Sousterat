@@ -50,7 +50,6 @@ public class CameraZoom : MonoBehaviour
             
             if (!_cameraZoom)
             {
-
                 _zoom = _zoomMax;
                 _cameraZoom = true;
                 _levelSpeedManager.levelSpeed = _levelSpeedManager.InitLevelSpeed * _multiplySpeed;
@@ -80,15 +79,15 @@ public class CameraZoom : MonoBehaviour
 
    public void AutoZoom(float _zoomMin,float _zoomMax)
     {
+        zoomCooldown += Time.deltaTime;
         if (zoomCooldown >= zoomTimer)
         {
             _camera.m_Lens.OrthographicSize = Mathf.Lerp(_camera.m_Lens.OrthographicSize, _zoomMin, Time.deltaTime * _velocity);
             _camera.Follow = _drillTarget;
-            if (_camera.m_Lens.OrthographicSize == _zoomMin)
+            if(zoomCooldown >= zoomTimer+2f)
             {
                 Chekcpoint.zoomAvailable = false;
                 zoomCooldown = 0;
-
             }
         }
         else
@@ -97,7 +96,6 @@ public class CameraZoom : MonoBehaviour
             {
                 _camera.m_Lens.OrthographicSize = Mathf.Lerp(_camera.m_Lens.OrthographicSize, _zoomMax, Time.deltaTime * _velocity);
                 _camera.Follow = _enemyTarget;
-                
             }
         }
 

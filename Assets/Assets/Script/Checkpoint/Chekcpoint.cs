@@ -24,7 +24,7 @@ public class Chekcpoint : MonoBehaviour
         if (zoomAvailable)
         {
             _zoom.AutoZoom(_zoomMin,_zoomMax);
-            _zoom.zoomCooldown += Time.deltaTime;
+            
         }
         else
         {
