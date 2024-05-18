@@ -13,6 +13,7 @@ TagManager:
   - Dirt
   - Ennemy
   - Ver
+  - Mine
   layers:
   - Default
   - TransparentFX

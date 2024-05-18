@@ -44,6 +44,12 @@ public class RockDetector : MonoBehaviour
             {
                 _levelSpeedManager.mineState = LevelSpeedManager.MineState.Enemy;
             }
+            else if (hit.collider.gameObject.tag == "Mine")
+            {
+                _RandomRotation();
+                hit.collider.gameObject.SetActive(false);
+                _levelSpeedManager.fuelTank -= _levelSpeedManager.mineFuelLost;
+            }
         }
     }
 

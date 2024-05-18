@@ -53,6 +53,7 @@ public class LevelSpeedManager : MonoBehaviour
         Full,
     }
     private FuelTankState _lastFuelTankState;
+    public float mineFuelLost;
 
     [Header("Mine")]
     public MineState mineState = MineState.Dirt;
