@@ -26,6 +26,7 @@ public class Burst : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.E))
             {
                 _isBurst = true;
+                AudioManager.Instance.PlaySFX(AudioManager.Instance.burstSFX);
                 if (_levelSpeedManager.fuelTank <= _burstConsumption)
                 {
                     _isBurst = false;
@@ -37,6 +38,7 @@ public class Burst : MonoBehaviour
         if (_isBurst)
         {
             _Burst();
+            
         }
     }
     
@@ -60,7 +62,7 @@ public class Burst : MonoBehaviour
         _burstCooldown += Time.deltaTime;
         if (_burstCooldown <= _burstDuration)
         {
-            AudioManager.Instance.PlaySFX(AudioManager.Instance.burstSFX);
+            
             _animator.SetBool("IsBurst", true);
             _levelSpeedManager.levelSpeed = _burstSpeed;
             _levelSpeedManager.fuelConsumption = _burstConsumption;
@@ -74,5 +76,7 @@ public class Burst : MonoBehaviour
             _levelSpeedManager.fuelConsumption = _levelSpeedManager.InitFuelConsumption;
         }
     }
+
+    
 }
  

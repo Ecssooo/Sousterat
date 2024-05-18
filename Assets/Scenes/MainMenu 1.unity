@@ -325,7 +325,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 558c1eb6fa91fc447bba414a5b6c8e42, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -727,7 +727,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: a4060ff456a261a4b9a5a85ea7426cbb, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 5b25cdf47b970684caec16725e34b873, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1095,8 +1095,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -0.000030518, y: 178}
-  m_SizeDelta: {x: 627.229, y: 167.192}
+  m_AnchoredPosition: {x: 767.86, y: 867.19995}
+  m_SizeDelta: {x: 468.94, y: 167.19}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &793750569
 MonoBehaviour:
@@ -1111,7 +1111,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1120,7 +1120,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 61
+    m_FontSize: 48
     m_FontStyle: 1
     m_BestFit: 0
     m_MinSize: 10
@@ -1131,7 +1131,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Appuyez sur ESPACE pour lancer
+  m_Text: Appuyez sur ESPACE pour lancer le jeu
 --- !u!222 &793750570
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1597,6 +1597,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1576449289}
+  - component: {fileID: 1576449290}
   m_Layer: 5
   m_Name: --Loading Screen--
   m_TagString: Untagged
@@ -1625,6 +1626,20 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1576449290
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1576449288}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1a1f572fe2f4aa4c85ae23b3dde9d5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _textToBlink: {fileID: 793750569}
+  blinkDuration: 0.8
 --- !u!1 &1606857466
 GameObject:
   m_ObjectHideFlags: 0
