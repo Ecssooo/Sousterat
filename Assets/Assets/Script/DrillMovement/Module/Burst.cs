@@ -13,7 +13,10 @@ public class Burst : MonoBehaviour
     [SerializeField] private float _burstSpeed;
     [SerializeField] private float _burstDuration;
     [SerializeField] private float _burstConsumption;
-    public float _burstCooldown;
+    private float _burstTimer;
+    [SerializeField] private float _burstCooldown;
+    private float _burstCooldownTimer;
+    private bool _burstAvailable = true;
 
     [Header("UI")] [SerializeField] private Animator _animator;
     
@@ -21,24 +24,33 @@ public class Burst : MonoBehaviour
     private bool _isTrigger;
     private void Update()
     {
+        if (_burstCooldown <= _burstCooldownTimer)
+        {
+            _burstAvailable = true;
+        }
+        else
+        {
+            _burstCooldownTimer += Time.deltaTime;
+        }
         if (_isTrigger)
         {
             if (Input.GetKeyDown(KeyCode.E))
             {
-                _isBurst = true;
-                AudioManager.Instance.PlaySFX(AudioManager.Instance.burstSFX);
-                if (_levelSpeedManager.fuelTank <= _burstConsumption)
+                if(_burstAvailable)
                 {
-                    _isBurst = false;
-                    _cameraShake.ShakeCamera(1.5f, 0.2f);
+                    _isBurst = true;
+                    AudioManager.Instance.PlaySFX(AudioManager.Instance.burstSFX);
+                    if (_levelSpeedManager.fuelTank <= _burstConsumption || _levelSpeedManager.fuelTank <= 10)
+                    {
+                        _isBurst = false;
+                        _cameraShake.ShakeCamera(1.5f, 0.2f);
+                    }
                 }
             }
         }
-
         if (_isBurst)
         {
             _Burst();
-            
         }
     }
     
@@ -59,8 +71,8 @@ public class Burst : MonoBehaviour
 
     private void _Burst()
     {
-        _burstCooldown += Time.deltaTime;
-        if (_burstCooldown <= _burstDuration)
+        _burstTimer += Time.deltaTime;
+        if (_burstTimer <= _burstDuration)
         {
             
             _animator.SetBool("IsBurst", true);
@@ -71,12 +83,12 @@ public class Burst : MonoBehaviour
         {
             _animator.SetBool("IsBurst", false);
             _isBurst = false;
-            _burstCooldown = 0f;
+            _burstTimer = 0f;
             _levelSpeedManager.levelSpeed = _levelSpeedManager.InitLevelSpeed;
             _levelSpeedManager.fuelConsumption = _levelSpeedManager.InitFuelConsumption;
+            _burstCooldownTimer = 0;
+            _burstAvailable = false;
         }
     }
-
-    
 }
  

@@ -24,12 +24,13 @@ public class SASManager : MonoBehaviour
 
     private void Update()
     {
-
-            if(isTrigger && !playerHasCoal)
+        if(isTrigger && !playerHasCoal)
+        {
+            if (Input.GetKeyDown(KeyCode.E))
             {
-                if (Input.GetKeyDown(KeyCode.E))
+                if (_coalAvailable > 0)
                 {
-                AudioManager.Instance.PlaySFX(AudioManager.Instance.charbonSFX);
+                    AudioManager.Instance.PlaySFX(AudioManager.Instance.charbonSFX);
                     _coal.SetActive(false);
                     playerHasCoal = true;
                     hasPlayed = false;
@@ -40,6 +41,7 @@ public class SASManager : MonoBehaviour
                     }
                 }
             }
+        }
         else
         {
             _CoalRespawn();

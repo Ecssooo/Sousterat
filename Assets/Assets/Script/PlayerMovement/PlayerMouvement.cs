@@ -78,7 +78,7 @@ public class PlayerMouvement : MonoBehaviour
             rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * MaxPlayerJumpPower);
             if (_sasManager.playerHasCoal)
             {
-                _animator.SetTrigger("Jump");
+                _animator.SetTrigger("JumpCoal");
             }
             else
             {
@@ -132,7 +132,7 @@ public class PlayerMouvement : MonoBehaviour
     //Permet de savoir si le joueur est au sol
     private bool IsGrounded()
     {
-        return Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
+        return Physics2D.OverlapCircle(groundCheck.position, 0.5f, groundLayer);
     }   
 
     //Permet de savoir si le joueur est contre un mur
