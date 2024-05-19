@@ -40,7 +40,9 @@ public class EnnemyFollowerV2 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+      
         _timer += Time.deltaTime;
+        Debug.Log(_timer);
         if(_timer >= _ennemyDuration)
         {
             StartCoroutine(WaitDestroy());
