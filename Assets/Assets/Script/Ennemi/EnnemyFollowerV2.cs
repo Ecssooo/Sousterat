@@ -35,12 +35,32 @@ public class EnnemyFollowerV2 : MonoBehaviour
     private float _currentSpeed;
     private float directionX;
     private float directionY;
-    
 
-    // Update is called once per frame
+    private bool facingRight = true;
+    private Vector3 lastPosition;
+
+    private void Start()
+    {
+
+        lastPosition = transform.position;
+    }
     void Update()
     {
-      
+
+
+        Vector3 movement = transform.position - lastPosition;
+
+        
+        if (movement.x > 0 && !facingRight)
+        {
+            Flip();
+        }
+        
+        else if (movement.x < 0 && facingRight)
+        {
+            Flip();
+        }
+
         _timer += Time.deltaTime;
         Debug.Log(_timer);
         if(_timer >= _ennemyDuration)
@@ -139,5 +159,13 @@ public class EnnemyFollowerV2 : MonoBehaviour
         _collider2d.enabled = true;
         gameObject.SetActive(false);
         isTouch = false;
+    }
+
+    void Flip()
+    {
+        facingRight = !facingRight; 
+        Vector3 scaler = transform.localScale;
+        scaler.x *= -1; 
+        transform.localScale = scaler; 
     }
 }
