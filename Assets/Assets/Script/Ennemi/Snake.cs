@@ -9,12 +9,19 @@ public class Snake : MonoBehaviour
     [SerializeField] private float moveSpeed = 2f;
     [SerializeField] private float closeEnoughThreshold = 0.3f;
     [SerializeField] private SpriteRenderer _spriteRenderer;
+    [SerializeField] private BoxCollider2D _boxCollider;
 
     private Transform _target;
     private int _destPoint = 0;
 
+
+    private void Awake()
+    {
+        _boxCollider = GetComponent<BoxCollider2D>();
+    }
     void Start()
     {
+        
       _target = _waypoints[0];
         transform.position = _target.position;
     }
@@ -45,16 +52,16 @@ public class Snake : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             StartCoroutine(CollisionOnEnnemi());
-            StartCoroutine(Disparition());
+            //StartCoroutine(Disparition());
             
         }
     }
 
     IEnumerator CollisionOnEnnemi()
     {
-        gameObject.layer = 7;
-        yield return new WaitForSeconds(1f);
-        gameObject.layer = 0;
+        _boxCollider.enabled = false;
+        yield return new WaitForSeconds(2f);
+        _boxCollider.enabled = true;
     }
 
     IEnumerator Disparition()
