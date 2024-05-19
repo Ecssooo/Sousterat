@@ -37,6 +37,7 @@ public class EnnemyFollowerV2 : MonoBehaviour
     private float directionY;
 
     private bool facingRight = true;
+
     private Vector3 lastPosition;
 
     private void Start()
@@ -53,13 +54,14 @@ public class EnnemyFollowerV2 : MonoBehaviour
         
         if (movement.x > 0 && !facingRight)
         {
-            Flip();
+            FlipX();
         }
         
         else if (movement.x < 0 && facingRight)
         {
-            Flip();
+            FlipX();
         }
+        
 
         _timer += Time.deltaTime;
         Debug.Log(_timer);
@@ -161,11 +163,14 @@ public class EnnemyFollowerV2 : MonoBehaviour
         isTouch = false;
     }
 
-    void Flip()
+    void FlipX()
     {
         facingRight = !facingRight; 
         Vector3 scaler = transform.localScale;
         scaler.x *= -1; 
         transform.localScale = scaler; 
     }
+    
+    
+    
 }
