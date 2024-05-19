@@ -7,7 +7,8 @@ public class RockDetector : MonoBehaviour
     [SerializeField] private LevelSpeedManager _levelSpeedManager;
     [SerializeField] private ActiveRotationHoraire _rotationHoraire;
     [SerializeField] private ActiveRotationAHoraire _rotationAntiHoraire;
-
+    [SerializeField] private CameraShake _cameraShake;
+    
     [SerializeField] private SASManager _sasManager;
     void Update()
     {
@@ -19,22 +20,22 @@ public class RockDetector : MonoBehaviour
             if (hit.collider.gameObject.tag == "Charbon")
             {
                 _levelSpeedManager.mineState = LevelSpeedManager.MineState.Coal;
-                _sasManager.mineCoal = true;
+                SASManager.mineCoal = true;
             }
             else if (hit.collider.gameObject.tag == "Calcite")
             {
                 _levelSpeedManager.mineState = LevelSpeedManager.MineState.Calcite;
-                _sasManager.mineCoal = false;
+                SASManager.mineCoal = false;
             }
             else if (hit.collider.gameObject.tag == "Granite")
             {
                 _levelSpeedManager.mineState = LevelSpeedManager.MineState.Granite;
-                _sasManager.mineCoal = false;
+                SASManager.mineCoal = false;
             }
             else if (hit.collider.gameObject.tag == "Dirt")
             {
                 _levelSpeedManager.mineState = LevelSpeedManager.MineState.Dirt;
-                _sasManager.mineCoal = false;
+                SASManager.mineCoal = false;
             }
             else if (hit.collider.gameObject.tag == "Edge")
             {
@@ -49,6 +50,7 @@ public class RockDetector : MonoBehaviour
                 _RandomRotation();
                 hit.collider.gameObject.SetActive(false);
                 _levelSpeedManager.fuelTank -= _levelSpeedManager.mineFuelLost;
+                _cameraShake.ShakeCamera(10f, 0.1f);
             }
         }
     }

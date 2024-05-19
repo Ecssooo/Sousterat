@@ -49,7 +49,7 @@ public class PlayerMouvement : MonoBehaviour
     public void Update()
     {
         horizontal = Input.GetAxisRaw("Horizontal");
-        if (_sasManager.playerHasCoal)
+        if (SASManager.playerHasCoal)
         {
             _animator.SetBool("PlayerHasCoal", true);
         }
@@ -62,7 +62,7 @@ public class PlayerMouvement : MonoBehaviour
         if(Input.GetButtonDown("Jump") && IsGrounded())
         {
             rb.velocity = new Vector2(rb.velocity.x, PlayerJumpPower);
-            if (_sasManager.playerHasCoal)
+            if (SASManager.playerHasCoal)
             {
                 _animator.SetTrigger("Jump");
             }
@@ -76,7 +76,7 @@ public class PlayerMouvement : MonoBehaviour
         if(Input.GetButtonUp("Jump") && rb.velocity.y > 0)
         {
             rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * MaxPlayerJumpPower);
-            if (_sasManager.playerHasCoal)
+            if (SASManager.playerHasCoal)
             {
                 _animator.SetTrigger("JumpCoal");
             }
@@ -104,7 +104,7 @@ public class PlayerMouvement : MonoBehaviour
             rb.velocity = new Vector2(horizontal * PlayerSpeed, rb.velocity.y);
             if (horizontal != 0)
             {
-                if (_sasManager.playerHasCoal)
+                if (SASManager.playerHasCoal)
                 {
                     _animator.SetBool("WalkCoal",true);
                 }
@@ -116,7 +116,7 @@ public class PlayerMouvement : MonoBehaviour
             }
             else
             {
-                if (_sasManager.playerHasCoal)
+                if (SASManager.playerHasCoal)
                 {
                     _animator.SetBool("WalkCoal",false);
                 }
@@ -160,7 +160,7 @@ public class PlayerMouvement : MonoBehaviour
     {
         if (WallSliding)
         {
-            if (_sasManager.playerHasCoal)
+            if (SASManager.playerHasCoal)
             {
                 _animator.SetBool("WallSlideCoal",true);
             }
@@ -172,7 +172,7 @@ public class PlayerMouvement : MonoBehaviour
         }
         else
         {
-            if (_sasManager.playerHasCoal)
+            if (SASManager.playerHasCoal)
             {
                 _animator.SetBool("WallSlideCoal",false);
             }

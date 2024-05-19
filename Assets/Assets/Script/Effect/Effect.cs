@@ -14,7 +14,7 @@ public class Effect : MonoBehaviour
 
     private void Update()
     {
-        if (_sasManager.playerHasCoal)
+        if (SASManager.playerHasCoal)
         {
             ActiveGameObject(_coalParticule);
         }

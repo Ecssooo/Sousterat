@@ -15,8 +15,8 @@ public class SASManager : MonoBehaviour
     [SerializeField] private float _coalRespawnTimer;
     [SerializeField] private int _maxCoalAvailable;
     public int _coalAvailable = 0;
-    public bool mineCoal;
-    public bool playerHasCoal;
+    public static bool mineCoal;
+    public static bool playerHasCoal;
     
     private float _coalRespawnCooldown;
     

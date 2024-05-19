@@ -20,7 +20,7 @@ public class Burst : MonoBehaviour
 
     [Header("UI")] [SerializeField] private Animator _animator;
     
-    public bool _isBurst = false;
+    private bool _isBurst = false;
     private bool _isTrigger;
     private void Update()
     {

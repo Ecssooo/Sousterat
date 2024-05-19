@@ -22,7 +22,7 @@ public class EngineManager : MonoBehaviour
 
     private void Update()
     {
-        if (_isTrigger && _sasManager.playerHasCoal)
+        if (_isTrigger && SASManager.playerHasCoal)
         {
             if (Input.GetKeyDown(KeyCode.E))
             {
@@ -36,7 +36,7 @@ public class EngineManager : MonoBehaviour
     private void _AddFuel()
     {
         _levelSpeedManager.fuelTank += _CalculFuelDiff();
-        _sasManager.playerHasCoal = false;
+        SASManager.playerHasCoal = false;
     }
 
     private float _CalculFuelDiff()
